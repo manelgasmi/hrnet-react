@@ -4,10 +4,15 @@ import { Link } from 'react-router-dom'
 import Employees from '../employees/Employees'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Select from 'react-dropdown-select';
+import { states } from '../../data/states';
+import { departmentOptions } from '../../data/departments';
 
 const Home = () => {
     const [startDate, setStartDate] = useState(null);
     const [dateOfBirth, setDateOfBirth] = useState(null);
+    const [selectedDepartment, setSelectedDepartment] = useState([]);
+
     return (
         <>
             <div className="title">
@@ -29,7 +34,7 @@ const Home = () => {
 
                     <label htmlFor="start-date">Start Date</label>
                     {/*<input id="start-date" type="text" /> */}
-                    <DatePicker id="start-date"selected={startDate} onChange={(date) => setStartDate(date)} />
+                    <DatePicker id="start-date" selected={startDate} onChange={(date) => setStartDate(date)} />
 
 
                     <fieldset className="address">
@@ -42,24 +47,28 @@ const Home = () => {
                         <input id="city" type="text" />
 
                         <label htmlFor="state">State</label>
-                        <select name="state" id="state"></select>
+                        <Select
+                            options={states}
+                            values={[]}
+                            onChange={(value) => console.log(value)}
+                        />
 
                         <label htmlFor="zip-code">Zip Code</label>
                         <input id="zip-code" type="number" />
                     </fieldset>
 
                     <label htmlFor="department">Department</label>
-                    <select name="department" id="department">
-                        <option>Sales</option>
-                        <option>Marketing</option>
-                        <option>Engineering</option>
-                        <option>Human Resources</option>
-                        <option>Legal</option>
-                    </select>
+                    <Select
+                        options={departmentOptions}
+                        values={selectedDepartment}
+                        onChange={(value) => setSelectedDepartment(value)}
+                        name="department"
+                        id="department"
+                    />
                 </form>
 
                 <button type='submit'>Save</button>
-            </div>
+            </div >
             <div id="confirmation" className="modal">Employee Created!</div>
         </>
     )

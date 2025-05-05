@@ -29,20 +29,17 @@ const Home = () => {
         const employee = {
             firstName: firstName,
             lastName: lastName,
-            dateOfBirth: dateOfBirth,
-            startDate: startDate,
-            street: street,
-            city: city,
-            state: state,
-            zip: zip,
-            department: department,
-        };
-
-        dispatch(setEmplyees({
-            ...employee,
             dateOfBirth: dateOfBirth.toISOString(),
             startDate: startDate.toISOString(),
-        }));
+            street: street,
+            city: city,
+            state: state[0].label,
+            zip: zip,
+            department: department[0].label,
+        };
+        
+        // save in store
+        dispatch(setEmplyees(employee));
         navigate('/employees')
     }
 
@@ -79,6 +76,7 @@ const Home = () => {
 
                         <label htmlFor="state">State</label>
                         <Select
+                            id="state"
                             required
                             options={states}
                             values={state}

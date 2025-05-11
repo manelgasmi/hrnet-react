@@ -9,6 +9,7 @@ import { states } from '../../data/states';
 import { departmentOptions } from '../../data/departments';
 import { useDispatch } from 'react-redux';
 import { setEmplyees } from '../../redux/employeeSlice';
+import MgModal from 'mg_modal';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -24,6 +25,9 @@ const Home = () => {
     const [zip, setZip] = useState(0);
     const [department, setDepartment] = useState([]);
 
+    // Show hide modal that contain success message on employee create
+    const [showModal, setShowModal] = useState(false);
+
     const submitForm = (e) => {
         e.preventDefault();
         const employee = {
@@ -37,10 +41,10 @@ const Home = () => {
             zip: zip,
             department: department[0].label,
         };
-        
+
         // save in store
         dispatch(setEmplyees(employee));
-        navigate('/employees')
+        setShowModal(true);
     }
 
     return (
@@ -100,7 +104,12 @@ const Home = () => {
                 </form>
 
             </div >
-            <div id="confirmation" className="modal">Employee Created!</div>
+
+            <MgModal
+                isOpen={showModal}
+                setIsOpen={setShowModal}
+                body="Employee Created!"
+            />
         </>
     )
 }

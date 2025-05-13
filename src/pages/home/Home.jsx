@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import "./home.scss"
 import { Link, useNavigate } from 'react-router-dom'
-import Employees from '../employees/Employees'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from 'react-dropdown-select';
@@ -62,11 +61,23 @@ const Home = () => {
                     <label htmlFor="last-name">Last Name</label>
                     <input required value={lastName} onChange={(e) => setLastName(e.target.value)} type="text" id="last-name" />
 
-                    <label htmlFor="date-of-birth">Date of Birth</label>
-                    <DatePicker required id="date-of-birth" selected={dateOfBirth} onChange={(date) => setDateOfBirth(date)} />
+                    <label htmlFor="date-of-birth" id="dob-label">Date of Birth</label>
+                    <DatePicker 
+                        required 
+                        id="date-of-birth" 
+                        selected={dateOfBirth} 
+                        onChange={(date) => setDateOfBirth(date)}
+                        aria-labelledby="dob-label"
+                    />
 
-                    <label htmlFor="start-date">Start Date</label>
-                    <DatePicker required id="start-date" selected={startDate} onChange={(date) => setStartDate(date)} />
+                    <label htmlFor="start-date" id="start-date-label">Start Date</label>
+                    <DatePicker 
+                        required 
+                        id="start-date" 
+                        selected={startDate} 
+                        onChange={(date) => setStartDate(date)}
+                        aria-labelledby="start-date-label"
+                    />
 
 
                     <fieldset className="address">
@@ -78,20 +89,24 @@ const Home = () => {
                         <label htmlFor="city">City</label>
                         <input value={city} onChange={(e) => setCity(e.target.value)} required id="city" type="text" />
 
-                        <label htmlFor="state">State</label>
-                        <Select
+                        <label htmlFor="state" id="state-label">State
+                            
+                        <Select 
                             id="state"
+                            name="state"
                             required
                             options={states}
                             values={state}
                             onChange={(value) => setState(value)}
+                            aria-labelledby="state-label"
                         />
+                        </label>
 
                         <label htmlFor="zip-code">Zip Code</label>
                         <input value={zip} onChange={(e) => setZip(e.target.value)} required id="zip-code" type="number" min={0} />
                     </fieldset>
 
-                    <label htmlFor="department">Department</label>
+                    <label htmlFor="department" id="department-label">Department
                     <Select
                         required
                         options={departmentOptions}
@@ -99,7 +114,8 @@ const Home = () => {
                         onChange={(value) => setDepartment(value)}
                         name="department"
                         id="department"
-                    />
+                        aria-labelledby="department-label"
+                    /></label>
                     <button type='submit'>Save</button>
                 </form>
 

@@ -12,7 +12,6 @@ import MgModal from 'mg_modal';
 
 const Home = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const [startDate, setStartDate] = useState(null);
     const [dateOfBirth, setDateOfBirth] = useState(null);

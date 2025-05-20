@@ -115,9 +115,10 @@ const Home = () => {
                         id="department"
                         aria-labelledby="department-label"
                     /></label>
-                    <button type='submit'>Save</button>
+                    <div className='container'>
+                        <button type='submit'>Save</button>    
+                    </div>
                 </form>
-
             </div >
 
             <MgModal
